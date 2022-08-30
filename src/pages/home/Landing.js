@@ -1,9 +1,9 @@
-import dataConfig from "../../config/config.json";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
 const Landing = () => {
-  const [data, setData] = useState([]);
+  const [movie, setMovie] = useState([]);
+  const [movies, setMovies] = useState([]);
 
   useEffect(() => {
     axios
@@ -13,7 +13,9 @@ const Landing = () => {
         },
       })
       .then(({ data }) => {
-        setData(data.results[0]);
+        console.log(data.results[0]);
+        setMovies(data.results);
+        setMovie(data.results[0]);
       });
   }, []);
 
@@ -31,18 +33,16 @@ const Landing = () => {
 
   return (
     <>
-      <div className="container mx-auto text-white">
-        <div className="grid grid-cols-3 items-center">
+      <div className="container mx-auto text-white pt-20">
+        <div className="grid grid-cols-3 items-center mb-5">
           <div className="movie-info flex justify-center">
             <div className="box">
               <div className="text-base text-textPrimary">
                 Release Date:
-                <span className="text-white">
-                  {data.release_date == undefined ? data.release_date : ""}
-                </span>
+                <span className="text-white">{movie.release_date}</span>
               </div>
               <div className="text-4xl mt-3 tracking-widest font-bold">
-                {data.original_title}
+                {movie.original_title}
               </div>
               <div className="flex mt-3 text-textPrimary">
                 <div className="border border-textPrimary px-2 mr-1 rounded-full">
@@ -58,9 +58,9 @@ const Landing = () => {
             </div>
           </div>
           <div className="movie-image flex justify-center">
-            <div className="w-80">
+            <div className="w-72">
               <img
-                src={process.env.REACT_APP_API_IMAGE_URL + data.poster_path}
+                src={process.env.REACT_APP_API_IMAGE_URL + movie.poster_path}
                 alt="poster"
                 className="m-auto"
               />
@@ -68,18 +68,41 @@ const Landing = () => {
           </div>
           <div className="movie-description">
             <div className="desc border-b-2 border-textPrimary">
-              {data.overview}
+              {movie.overview}
             </div>
             <div className="country mt-3">
               <div className="flex justify-between mb-5">
                 <label>Country: </label>
-                {data.original_language}
+                {movie.original_language}
               </div>
               <div className="flex justify-between">
                 <label>Actors: </label>
-                {data.Actors}
+                {movie.Actors}
               </div>
             </div>
+          </div>
+        </div>
+        <div className="bg-[#2E2E2E] h-36 w-full p-3">
+          <div className="grid grid-cols-6 grid-rows-1 gap-5 h-full">
+            {movies.slice(0, 6).map((thumb, index) => {
+              return (
+                <div
+                  className="group w-full h-full rounded-lg overflow-hidden relative transition hover:scale-110"
+                  key={index}
+                >
+                  <img
+                    src={
+                      process.env.REACT_APP_API_IMAGE_URL + thumb.backdrop_path
+                    }
+                    alt="thumb"
+                    className="w-full h-full"
+                  />
+                  <div className="title absolute bottom-0 w-full opacity-0 bg-black-rgba text-center py-1 transition ease-in-out duration-200 group-hover:opacity-100">
+                    {thumb.original_title}
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
