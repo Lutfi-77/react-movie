@@ -1,0 +1,26 @@
+[
+  {
+    "path": "assets/category/ghost.png",
+    "title": "Horror"
+  },
+  {
+    "path": "assets/category/cinema.png",
+    "title": "Comedy"
+  },
+  {
+    "path": "assets/category/dragon.png",
+    "title": "Fantasy"
+  },
+  {
+    "path": "assets/category/hearts.png",
+    "title": "Romance"
+  },
+  {
+    "path": "assets/category/group.png",
+    "title": "Drama"
+  },
+  {
+    "path": "assets/category/gun.png",
+    "title": "Action"
+  }
+]
