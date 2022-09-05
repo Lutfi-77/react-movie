@@ -1,9 +1,24 @@
-import React from "react";
+import axios from "axios";
+import React, { useState } from "react";
 
 function Card(props) {
+  const [trailer, setTrailer] = useState([]);
+  const video = (e) => {
+    const idVideo = e.target.parentNode.dataset.video;
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/movie/${idVideo}/videos`, {
+        params: {
+          api_key: process.env.REACT_APP_API_KEY,
+        },
+      })
+      .then(({ data }) => {
+        setTrailer(data.results[0]);
+      });
+  };
+
   return (
-    <div className="image w-full md:mt-0 md:mt-5">
-      <div className="relative">
+    <div className="w-full md:mt-0 mt-3">
+      <div className="relative" onClick={video} data-video={props.popular.id}>
         <img
           src={process.env.REACT_APP_API_IMAGE_URL + props.popular.poster_path}
           alt="best-week"

@@ -10,7 +10,7 @@ function Category() {
       <div className="md:text-sm text-xs text-textPrimary text-center mb-5">
         The Most Up-To-Date And Complete Archive Of Movies And Series
       </div>
-      <div className="grid md:grid-cols-6 md:gap-10 grid-cols-3 grid-rows-2">
+      <div className="grid md:grid-cols-6 md:grid-rows-1 md:gap-10 grid-cols-3 grid-rows-2">
         {data.map((categories, index) => {
           return (
             <div className="md:w-1/2 w-14 m-auto" key={index}>

@@ -9,6 +9,7 @@ const Landing = () => {
   const [movie, setMovie] = useState([]);
   const [movies, setMovies] = useState([]);
   const [popular, setPopulars] = useState([]);
+  const [modal, setModal] = useState(false);
 
   useEffect(() => {
     axios
