@@ -5,14 +5,14 @@ function MovieDetail({ data }) {
     <>
       <div className="movie-info flex justify-center">
         <div className="box">
-          <div className="text-base text-textPrimary">
+          <div className="text-xs md:text-base text-textPrimary">
             Release Date:
             <span className="text-white">{data.release_date}</span>
           </div>
-          <div className="text-4xl mt-3 tracking-widest font-bold">
+          <div className="text-sm md:text-4xl mt-3 tracking-widest font-bold">
             {data.original_title}
           </div>
-          <div className="flex mt-3 text-textPrimary">
+          <div className="flex mt-3 text-textPrimary md:text-base text-sm">
             <div className="border border-textPrimary px-2 mr-1 rounded-full">
               Action
             </div>
@@ -26,7 +26,7 @@ function MovieDetail({ data }) {
         </div>
       </div>
       <div className="movie-image flex justify-center">
-        <div className="w-72">
+        <div className="md:w-72 w-full">
           <img
             src={process.env.REACT_APP_API_IMAGE_URL + data.poster_path}
             alt="poster"
@@ -34,12 +34,12 @@ function MovieDetail({ data }) {
           />
         </div>
       </div>
-      <div className="movie-description">
+      <div className="movie-description col-span-2 md:col-span-1 md:mt-0 mt-5 md:text-base text-sm">
         <div className="desc border-b-2 border-textPrimary">
           {data.overview}
         </div>
         <div className="country mt-3">
-          <div className="flex justify-between mb-5">
+          <div className="flex justify-between mb-5 uppercase">
             <label>Country: </label>
             {data.original_language}
           </div>

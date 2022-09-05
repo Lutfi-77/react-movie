@@ -8,7 +8,7 @@ function App() {
   return (
     <>
       <Navbar />
-      <div className="bg-primary w-full h-full">
+      <div className="bg-primary w-full">
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="/about" element={<About />} />

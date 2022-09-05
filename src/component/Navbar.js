@@ -1,9 +1,28 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
+  const [colorChange, setColorChange] = useState(false);
+
+  const changeBackgroundOnScroll = () => {
+    if (window.scrollY >= 20) {
+      setColorChange(true);
+    } else {
+      setColorChange(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", changeBackgroundOnScroll);
+  });
+
   return (
     <>
-      <div className="w-full fixed">
+      <div
+        className={
+          colorChange ? "w-full fixed z-10 bg-primary" : "w-full fixed z-10"
+        }
+      >
         <div className="container m-auto py-2">
           <div className="grid grid-cols-2">
             <div className="flex items-center">
