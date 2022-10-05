@@ -4,11 +4,14 @@ import Card from "../../component/Card";
 import Category from "../../component/home/Category";
 import MovieDetail from "../../component/home/MovieDetail";
 import NewArrivals from "../../component/home/NewArrivals";
+import Modal from "../../component/Modal";
 
 const Landing = () => {
   const [movie, setMovie] = useState([]);
   const [movies, setMovies] = useState([]);
+  const [detail, setDetail] = useState([]);
   const [popular, setPopulars] = useState([]);
+  const [trailer, setTrailer] = useState([]);
   const [modal, setModal] = useState(false);
 
   useEffect(() => {
@@ -19,11 +22,41 @@ const Landing = () => {
         },
       })
       .then(({ data }) => {
-        // console.log(data.results[0]);
         setMovies(data.results);
         setMovie(data.results[0]);
       });
   }, []);
+
+  const showModal = () => {
+    setModal(!modal);
+    setTrailer("");
+  };
+
+  const getDetail = (e) => {
+    const idVideo = e.target.parentNode.dataset.video;
+    axios
+      .all([
+        axios.get(`${process.env.REACT_APP_API_URL}/movie/${idVideo}/videos`, {
+          params: {
+            api_key: process.env.REACT_APP_API_KEY,
+          },
+        }),
+
+        axios.get(`${process.env.REACT_APP_API_URL}/movie/${idVideo}`, {
+          params: {
+            api_key: process.env.REACT_APP_API_KEY,
+          },
+        }),
+      ])
+      .then(
+        axios.spread((trailerData, movieDetail) => {
+          setTrailer(trailerData.data.results[0]);
+          setDetail(movieDetail.data);
+          console.log(movieDetail.data);
+          setModal(!modal);
+        })
+      );
+  };
 
   useEffect(() => {
     axios
@@ -67,11 +100,17 @@ const Landing = () => {
           </div>
           <div className="grid md:grid-cols-5 md:gap-5 grid-cols-3 grid-rows-2 gap-5 w-full mt-5">
             {popular.slice(0, 10).map((best, index) => {
-              return <Card popular={best} key={index} />;
+              return <Card popular={best} key={index} onClick={getDetail} />;
             })}
           </div>
         </div>
       </section>
+      <Modal
+        show={modal}
+        showModal={showModal}
+        videoTrailer={trailer}
+        detailMovie={detail}
+      />
     </>
   );
 };

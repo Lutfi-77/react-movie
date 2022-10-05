@@ -1,6 +1,9 @@
 import React from "react";
+import Genre from "../Genre";
+import genre from "../../data/genre.json";
 
 function MovieDetail({ data }) {
+  // console.log(genre);
   return (
     <>
       <div className="movie-info flex justify-center">
@@ -12,17 +15,7 @@ function MovieDetail({ data }) {
           <div className="text-sm md:text-4xl mt-3 tracking-widest font-bold">
             {data.original_title}
           </div>
-          <div className="flex mt-3 text-textPrimary md:text-base text-sm">
-            <div className="border border-textPrimary px-2 mr-1 rounded-full">
-              Action
-            </div>
-            <div className="border border-textPrimary px-2 mx-1 rounded-full">
-              Action
-            </div>
-            <div className="border border-textPrimary px-2 mx-1 rounded-full">
-              Action
-            </div>
-          </div>
+          <Genre data={genre} />
         </div>
       </div>
       <div className="movie-image flex justify-center">
