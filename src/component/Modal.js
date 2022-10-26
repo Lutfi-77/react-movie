@@ -1,4 +1,5 @@
 import React from "react";
+import Button from "./Button";
 import Genre from "./Genre";
 
 function Modal({ show, showModal, videoTrailer, detailMovie }) {
@@ -44,6 +45,10 @@ function Modal({ show, showModal, videoTrailer, detailMovie }) {
               </div>
             </div>
             <Genre data={detailMovie.genres} />
+            <Button
+              text={"Book Ticket"}
+              style={"bg-secondary float-left mt-5 text-white"}
+            />
           </div>
         </div>
       </div>
