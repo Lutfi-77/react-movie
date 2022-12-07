@@ -6,7 +6,6 @@ const ModalOrder = ({ isOpenOrder, setOpen, data }) => {
   const handleOnclick = () => {
     setOpen(!isOpenOrder);
   };
-  console.log(data);
   return (
     <div
       className={`bg-black-rgba fixed inset-0 z-21 flex items-center justify-center ${
