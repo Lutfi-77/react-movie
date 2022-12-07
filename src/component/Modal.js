@@ -2,13 +2,24 @@ import React from "react";
 import Button from "./Button";
 import Genre from "./Genre";
 
-function Modal({ show, showModal, videoTrailer, detailMovie }) {
-  const genre = detailMovie.genres ? detailMovie.genres : ["asd", "asdasd"];
-  console.log(genre);
+const Modal = ({
+  isOpen,
+  showModal,
+  videoTrailer,
+  detailMovie,
+  setModal,
+  isOpenOrder,
+}) => {
+  const handleOnclick = () => {
+    document.querySelector("iframe").src = "";
+    setModal(!isOpen);
+    isOpenOrder(true);
+  };
+
   return (
     <div
       className={`bg-black-rgba fixed inset-0 z-20 flex items-center justify-center ${
-        show ? "block" : "hidden"
+        isOpen ? "block" : "hidden"
       }`}
     >
       <div className="container w-full relative mx-auto text-center bg-white rounded-lg">
@@ -27,7 +38,7 @@ function Modal({ show, showModal, videoTrailer, detailMovie }) {
               title={videoTrailer.id}
               className="w-full h-96"
               allow="autoplay"
-              src={`https://www.youtube.com/embed/${videoTrailer.key}?autoplay=1`}
+              src={`https://www.youtube.com/embed/${videoTrailer.key}?autoplay=1&?enablejsapi=1`}
             ></iframe>
           </div>
           <div className="w-full">
@@ -47,13 +58,14 @@ function Modal({ show, showModal, videoTrailer, detailMovie }) {
             <Genre data={detailMovie.genres} />
             <Button
               text={"Book Ticket"}
-              style={"bg-secondary float-left mt-5 text-white"}
+              styles={"bg-secondary float-left mt-5 text-white"}
+              onClick={handleOnclick}
             />
           </div>
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default Modal;

@@ -5,6 +5,7 @@ import Category from "../../component/home/Category";
 import MovieDetail from "../../component/home/MovieDetail";
 import NewArrivals from "../../component/home/NewArrivals";
 import Modal from "../../component/Modal";
+import ModalOrder from "../../component/ModalOrder";
 
 const Landing = () => {
   const [movie, setMovie] = useState([]);
@@ -13,6 +14,7 @@ const Landing = () => {
   const [popular, setPopulars] = useState([]);
   const [trailer, setTrailer] = useState([]);
   const [modal, setModal] = useState(false);
+  const [newModal, setNewModal] = useState(false);
 
   useEffect(() => {
     axios
@@ -106,11 +108,14 @@ const Landing = () => {
         </div>
       </section>
       <Modal
-        show={modal}
+        isOpen={modal}
         showModal={showModal}
         videoTrailer={trailer}
         detailMovie={detail}
+        setModal={setModal}
+        isOpenOrder={setNewModal}
       />
+      <ModalOrder isOpenOrder={newModal} setOpen={setNewModal} data={detail} />
     </>
   );
 };

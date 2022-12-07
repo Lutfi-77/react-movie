@@ -1,10 +1,10 @@
 import React from "react";
 
-function Button({ style, text, closeModal }) {
+function Button({ className, text, onClick }) {
   return (
     <button
-      className={`py-2 px-10 rounded-md text-sm ${style}`}
-      onClick={closeModal}
+      className={`py-2 px-10 rounded-md text-sm ${className}`}
+      onClick={onClick}
     >
       {text}
     </button>
